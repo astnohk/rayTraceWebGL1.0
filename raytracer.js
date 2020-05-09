@@ -119,7 +119,7 @@ const fsSource =
 			trace.col += vec3(0.0, 0.0, 0.0) * traceStart.reflection;
 			float f0 = 0.7;
 			trace.reflection *= vec3(0.5, 0.6, 1.0)
-			    * vec3(f0 + (1.0 - f0) * pow(length(dot(trace.ray, n)), 5.0) + (1.0 - f0) * pow(length(dot(trace.ray, n)), 5.0));
+			    * vec3(f0 * (1.0 + pow(dot(trace.ray, n), 5.0)) + (1.0 - f0) * pow(1.0 - dot(trace.ray, n), 5.0));
 		} else {
 			trace.origin = vec3(0.0);
 			trace.ray = vec3(0.0);
