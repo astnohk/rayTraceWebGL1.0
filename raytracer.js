@@ -73,7 +73,7 @@ const fsSource =
 			vec3 sphereVector = spherePosition[n] - traceStart.origin;
 			vec3 r_sphereRay = cross(sphereVector, traceStart.ray);
 			vec3 sphereReflectPoint =
-			    (dot(sphereVector, traceStart.ray) - sqrt(sphereRadius[n] * sphereRadius[n] - r_sphereRay * r_sphereRay))
+			    (dot(sphereVector, traceStart.ray) - sqrt(pow(sphereRadius[n], 2.0) - pow(length(r_sphereRay), 2.0)))
 			    * traceStart.ray + traceStart.origin;
 			float r_min = mix(
 			    length(sphereReflectPoint - traceStart.origin),
@@ -117,8 +117,9 @@ const fsSource =
 				random(vec2(traceStart.ray.z, seed)))
 			    );
 			trace.col += vec3(0.0, 0.0, 0.0) * traceStart.reflection;
-			trace.reflection *= vec3(0.5, 0.6, 1.0) *
-			    vec3(0.8 * length(dot(trace.ray, n)) + 0.8 * length(cross(trace.ray, n)));
+			float f0 = 0.7;
+			trace.reflection *= vec3(0.5, 0.6, 1.0)
+			    * vec3(f0 + (1.0 - f0) * pow(length(dot(trace.ray, n)), 5.0) + (1.0 - f0) * pow(length(dot(trace.ray, n)), 5.0));
 		} else {
 			trace.origin = vec3(0.0);
 			trace.ray = vec3(0.0);
