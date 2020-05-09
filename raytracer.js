@@ -170,7 +170,7 @@ const fsSource =
 	}
 
 	void main(void) {
-		const float max_iter = 16.0;
+		const float max_iter = 3.0;
 		const int max_bound = 5;
 
 		vec3 color = vec3(0.0);
