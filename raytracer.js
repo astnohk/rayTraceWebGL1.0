@@ -160,7 +160,8 @@ const fsSource =
 				random(vec2(traceStart.ray.z, seed)))
 			    );
 			trace.col += col_wall * traceStart.reflection;
-			trace.reflection *= reflection * vec3(0.8 + 0.5 * pow(length(cross(trace.ray, normal)), 50.0));
+			//trace.reflection *= reflection * vec3(0.8 + 0.5 * pow(length(cross(trace.ray, normal)), 50.0));
+			trace.reflection *= reflection * vec3(0.8 + 0.2 * pow(1.0 - dot(trace.ray, normal), 5.0));
 		}
 
 		// saturation of color
